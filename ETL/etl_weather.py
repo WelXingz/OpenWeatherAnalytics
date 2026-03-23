@@ -4,11 +4,7 @@ import os
 from datetime import datetime
 
 API_KEY = os.environ.get("API_KEY")
-DB_HOST = os.environ.get("DB_HOST")
-DB_NAME = os.environ.get("DB_NAME")
-DB_USER = os.environ.get("DB_USER")
-DB_PASSWORD = os.environ.get("DB_PASSWORD")
-DB_PORT = os.environ.get("DB_PORT")
+DATABASE_URL = os.environ.get("DATABASE_URL")
 
 CITY = "Curitiba"
 
@@ -25,13 +21,7 @@ weather = data["weather"][0]["description"]
 wind_speed = data["wind"]["speed"]
 
 # Database Connection
-conn = psycopg2.connect(
-    host=DB_HOST,
-    database=DB_NAME,
-    user=DB_USER,
-    password=DB_PASSWORD,
-    port=DB_PORT
-)
+conn = psycopg2.connect(DATABASE_URL)
 
 cursor = conn.cursor()
 
