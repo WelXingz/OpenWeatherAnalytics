@@ -36,7 +36,7 @@ capitals = [
     "Sao Luis"
 ]
 
-# conecta uma vez só (melhor prática)
+# connection
 conn = psycopg2.connect(DATABASE_URL)
 cursor = conn.cursor()
 
