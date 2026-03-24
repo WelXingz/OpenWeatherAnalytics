@@ -7,7 +7,7 @@ API_KEY = os.environ.get("API_KEY")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 capitals = [
- "Curitiba",
+    "Curitiba",
     "Sao Paulo",
     "Rio de Janeiro",
     "Belo Horizonte",
@@ -36,7 +36,10 @@ capitals = [
     "Sao Luis"
 ]
 
-# API
+# conecta uma vez só (melhor prática)
+conn = psycopg2.connect(DATABASE_URL)
+cursor = conn.cursor()
+
 for city in capitals:
     try:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city},BR&appid={API_KEY}&units=metric"
@@ -50,32 +53,23 @@ for city in capitals:
 
         temperature = data["main"]["temp"]
         humidity = data["main"]["humidity"]
+        weather = data["weather"][0]["description"]
+        wind_speed = data["wind"]["speed"]
 
-        print(f"{city} OK")
+        #INSERT 
+        cursor.execute("""
+            INSERT INTO weather_data (city, temperature, humidity, weather, wind_speed)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (city, temperature, humidity, weather, wind_speed))
 
-        # INSERT aqui
+        print(f"{city} inserted")
 
     except Exception as e:
         print(f"Major error in {city}: {e}")
         continue
 
-# Data Extraction
-print(data)
-temperature = data["main"]["temp"]
-humidity = data["main"]["humidity"]
-weather = data["weather"][0]["description"]
-wind_speed = data["wind"]["speed"]
-
-# Database Connection
-conn = psycopg2.connect(DATABASE_URL)
-
-cursor = conn.cursor()
-
-cursor.execute("""
-    INSERT INTO weather_data (city, temperature, humidity, weather, wind_speed)
-    VALUES (%s, %s, %s, %s, %s)
-""", (city, temperature, humidity, weather, wind_speed))
-
+#commit
 conn.commit()
+
 cursor.close()
 conn.close()
