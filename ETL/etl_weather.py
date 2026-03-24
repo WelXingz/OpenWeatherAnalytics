@@ -63,7 +63,7 @@ cursor = conn.cursor()
 cursor.execute("""
     INSERT INTO weather_data (city, temperature, humidity, weather, wind_speed)
     VALUES (%s, %s, %s, %s, %s)
-""", (CITY, temperature, humidity, weather, wind_speed))
+""", (city, temperature, humidity, weather, wind_speed))
 
 conn.commit()
 cursor.close()
