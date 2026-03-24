@@ -37,7 +37,7 @@ capitals = [
 ]
 
 # API
-for city in capitais:
+for city in capitals:
     try:
         url = f"https://api.openweathermap.org/data/2.5/weather?q={city},BR&appid={API_KEY}&units=metric"
         
