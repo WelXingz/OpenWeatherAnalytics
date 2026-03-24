@@ -7,38 +7,38 @@ API_KEY = os.environ.get("API_KEY")
 DATABASE_URL = os.environ.get("DATABASE_URL")
 
 capitals = [
-    "Curitiba",
-    "São Paulo",
+ "Curitiba",
+    "Sao Paulo",
     "Rio de Janeiro",
     "Belo Horizonte",
-    "Brasília",
+    "Brasilia",
     "Salvador",
     "Fortaleza",
     "Recife",
     "Porto Alegre",
     "Manaus",
-    "Belém",
-    "Goiânia",
-    "Florianópolis",
-    "Vitória",
+    "Belem",
+    "Goiania",
+    "Florianopolis",
+    "Vitoria",
     "Natal",
-    "João Pessoa",
-    "Maceió",
+    "Joao Pessoa",
+    "Maceio",
     "Aracaju",
-    "Cuiabá",
+    "Cuiaba",
     "Campo Grande",
     "Palmas",
     "Boa Vista",
     "Rio Branco",
-    "Macapá",
+    "Macapa",
     "Porto Velho",
     "Teresina",
-    "São Luís"
+    "Sao Luis"
 ]
 
 # API
 for city in capitals:
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={API_KEY}&units=metric"
+    url = f"https://api.openweathermap.org/data/2.5/weather?q={city},BR&appid={API_KEY}&units=metric"
     
     response = requests.get(url)
     data = response.json()
