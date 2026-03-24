@@ -37,16 +37,27 @@ capitals = [
 ]
 
 # API
-for city in capitals:
-    url = f"https://api.openweathermap.org/data/2.5/weather?q={city},BR&appid={API_KEY}&units=metric"
-    
-    response = requests.get(url)
-    data = response.json()
+for city in capitais:
+    try:
+        url = f"https://api.openweathermap.org/data/2.5/weather?q={city},BR&appid={API_KEY}&units=metric"
+        
+        response = requests.get(url)
+        data = response.json()
 
-    # extrai dados
-    temperature = data["main"]["temp"]
-    humidity = data["main"]["humidity"]
+        if "main" not in data:
+            print(f"City error {city}: {data}")
+            continue
 
+        temperature = data["main"]["temp"]
+        humidity = data["main"]["humidity"]
+
+        print(f"{city} OK")
+
+        # INSERT aqui
+
+    except Exception as e:
+        print(f"Major error in {city}: {e}")
+        continue
 
 # Data Extraction
 print(data)
