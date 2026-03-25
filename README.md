@@ -1,6 +1,6 @@
 # 🌎 Real-Time Weather Data Pipeline & Dashboard
 
-This project builds an automated ETL pipeline that extracts real-time weather data from a public API, stores it in a PostgreSQL database, and visualizes insights using Tableau.
+This project builds an automated ETL pipeline that extracts real-time weather data about brazilian capitals from a public API, stores it in a PostgreSQL database, and visualizes insights using Tableau.
 
 ⚙️ Tech Stack
 - Python  
